@@ -6,7 +6,7 @@ import controllers.HomeController;
  *
  * @author jerem
  */
-public class MVCInJavaJeremy {
+public class Main {
 
  
     public static void main(String[] args) {

@@ -8,6 +8,7 @@ package models;
  *
  * @author jerem
  */
-public class Frequency {
-    
+public enum Frequency 
+{
+	DAILY, WEEKLY, MONTHLY;
 }
