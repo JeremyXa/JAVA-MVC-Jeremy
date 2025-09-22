@@ -1,5 +1,6 @@
 
 package mvc.in.java.jeremy;
+import core.Controller;
 import controllers.HomeController;
 /**
  *
@@ -7,13 +8,11 @@ import controllers.HomeController;
  */
 public class MVCInJavaJeremy {
 
-    /**
-     * @param args the command line arguments
-     */
+ 
     public static void main(String[] args) {
        
         HomeController c = new HomeController();
-        
+        c.run();
     }
     
 }
