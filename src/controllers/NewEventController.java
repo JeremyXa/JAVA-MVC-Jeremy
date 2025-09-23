@@ -1,89 +1,84 @@
+package controllers; // Define el paquete donde se encuentra la clase
 
-package controllers;
+import javax.swing.JOptionPane; // Para mostrar cuadros de diálogo (mensajes de error/información)
 
-import javax.swing.JOptionPane;
-
-import core.Controller;
-import models.SchedulerEvent;
-import models.SchedulerIO;
-import views.EventListView;
-import views.NewEventView;
-
+import core.Controller; // Clase base Controller del framework MVC
+import models.SchedulerEvent; // Modelo que representa un evento
+import models.SchedulerIO; // Clase que maneja la lectura/escritura de eventos
+import views.EventListView; // Vista que muestra la lista de eventos
+import views.NewEventView; // Vista para crear un nuevo evento
 
 /**
- * Responsible for {@link NewEventView} behavior.
+ * Controlador responsable del comportamiento de NewEventView
  */
-public class NewEventController extends Controller 
+public class NewEventController extends Controller // Hereda de Controller
 {
-	//-----------------------------------------------------------------------
-	//		Attributes
-	//-----------------------------------------------------------------------
-	private NewEventView newEventView;
-	private EventListController eventListController;
+    //-----------------------------------------------------------------------
+    // Atributos
+    //-----------------------------------------------------------------------
+    private NewEventView newEventView; // Vista asociada a la creación de eventos
+    private EventListController eventListController; // Referencia al controlador de lista de eventos
 
-	
-	//-----------------------------------------------------------------------
-	//		Constructor
-	//-----------------------------------------------------------------------
-	/**
-	 * Responsible for create a {@link SchedulerEvent new event}. 
-	 * 
-	 * @param eventListController {@link EventListController}, because it will 
-	 * add new events created in {@link NewEventView}.
-	 */
-	public NewEventController(EventListController eventListController) 
-	{
-		this.eventListController = eventListController;
-		
-	}
-	
-	
-	//-----------------------------------------------------------------------
-	//		Methods
-	//-----------------------------------------------------------------------
-	@Override
-	public void run() 
-	{
-		newEventView = new NewEventView(this);
-	}
-	
-	/**
-	 * Creates a new {@link SchedulerEvent} and puts it on {@link EventListView}.
-	 * 
-	 * @param event Event to be added
-	 */
-	public void addEvent(SchedulerEvent event)
-	{
-		Object[] metadata = new Object[5];
-		metadata[0] = event.getDate();
-		metadata[1] = event.getEventDesc();
-		metadata[2] = event.getFrequency();
-		metadata[3] = event.getFwdEmail();
-		metadata[4] = event.getAlarm() ? "ON" : "OFF";
+    //-----------------------------------------------------------------------
+    // Constructor
+    //-----------------------------------------------------------------------
+    /**
+     * Constructor que recibe el controlador de lista de eventos.
+     * Esto permite que, cuando se cree un nuevo evento,
+     * se pueda actualizar la lista en EventListView.
+     */
+    public NewEventController(EventListController eventListController) 
+    {
+        this.eventListController = eventListController; // Guarda la referencia
+    }
 
-		try {
-			SchedulerIO schedulerIO = new SchedulerIO();
-			schedulerIO.attach(newEventView);
-			schedulerIO.saveEvent(event);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "ERROR", e.getMessage(), JOptionPane.ERROR_MESSAGE);
-		}
-		
-		
-		eventListController.addNewRow(metadata);
-	}
-	
-	
-	//-----------------------------------------------------------------------
-	//		Getters
-	//-----------------------------------------------------------------------
-	/**
-	 * Gets the {@link NewEventView view associated with this controller}.
-	 * 
-	 * @return View associated with this controller
-	 */
-	public NewEventView getView()
-	{
-		return newEventView;
-	}
+    //-----------------------------------------------------------------------
+    // Métodos
+    //-----------------------------------------------------------------------
+    @Override
+    public void run()  // Inicializa la vista de creación de eventos
+    {
+        newEventView = new NewEventView(this); // Crea la vista y la vincula con este controlador
+    }
+    
+    /**
+     * Crea un nuevo SchedulerEvent y lo agrega a EventListView.
+     * También lo guarda en el archivo usando SchedulerIO.
+     * 
+     * @param event Evento que será agregado
+     */
+    public void addEvent(SchedulerEvent event)
+    {
+        // Crea un arreglo de metadatos que representará la fila en la tabla
+        Object[] metadata = new Object[5];
+        metadata[0] = event.getDate();        // Fecha del evento
+        metadata[1] = event.getEventDesc();   // Descripción
+        metadata[2] = event.getFrequency();   // Frecuencia
+        metadata[3] = event.getFwdEmail();    // Email
+        metadata[4] = event.getAlarm() ? "ON" : "OFF"; // Estado de la alarma (ON/OFF)
+
+        try {
+            SchedulerIO schedulerIO = new SchedulerIO(); // Crea instancia de IO
+            schedulerIO.attach(newEventView); // Asocia la vista para escuchar cambios
+            schedulerIO.saveEvent(event); // Guarda el evento en el archivo
+        } catch (Exception e) {
+            // Muestra mensaje de error si ocurre un problema al guardar
+            JOptionPane.showMessageDialog(null, "ERROR", e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        }
+        
+        // Agrega la nueva fila a la tabla de eventos
+        eventListController.addNewRow(metadata);
+    }
+
+    //-----------------------------------------------------------------------
+    // Getters
+    //-----------------------------------------------------------------------
+    /**
+     * Devuelve la vista asociada a este controlador.
+     * @return newEventView
+     */
+    public NewEventView getView()
+    {
+        return newEventView; // Retorna la instancia de la vista
+    }
 }

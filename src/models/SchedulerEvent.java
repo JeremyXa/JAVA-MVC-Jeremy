@@ -1,52 +1,100 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package models;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
+import java.text.ParseException;
 
-public class SchedulerEvent 
-{
-	
-	private String eventDesc;
-	private String fwdEmail;
-	private Date date;
-	private Frequency frequency;
-	private boolean alarm;
+public class SchedulerEvent {
 
-	
-	
-	@Override
-	public String toString() 
-	{
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-		
-		return sdf.format(this.date) + ";"+ getEventDesc() +
-		   ";" + getFrequency() + ";" + getFwdEmail() + ";"
-		   + (getAlarm() == true ? "1" : "0");
-	}
-	
+    private String eventDesc;
+    private String fwdEmail;
+    private Date date;
+    private Frequency frequency;
+    private boolean alarm;
 
-	
-	public String getEventDesc() { return eventDesc; }
+    // Constructor vacío por defecto
+    public SchedulerEvent() {
+    }
 
-	public void setEventDesc(String descEvento) { this.eventDesc = descEvento; }
+    // Nuevo constructor para crear un evento a partir de los datos de la tabla
+    public SchedulerEvent(String dateString, String description, String frequencyString, String email, boolean alarm) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            this.date = sdf.parse(dateString);
+        } catch (ParseException e) {
+            System.err.println("Error al parsear la fecha: " + e.getMessage());
+            this.date = null;
+        }
+        this.eventDesc = description;
+        this.frequency = Frequency.valueOf(frequencyString.toUpperCase());
+        this.fwdEmail = email;
+        this.alarm = alarm;
+    }
 
-	public String getFwdEmail() { return fwdEmail; }
+    @Override
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
-	public void setFwdEmail(String encEmail) { this.fwdEmail = encEmail; }
+        return sdf.format(this.date) + ";" + getEventDesc()
+                + ";" + getFrequency() + ";" + getFwdEmail() + ";"
+                + (getAlarm() == true ? "1" : "0");
+    }
 
-	public Date getDate() { return date; }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        SchedulerEvent that = (SchedulerEvent) obj;
+        return alarm == that.alarm &&
+               Objects.equals(eventDesc, that.eventDesc) &&
+               Objects.equals(fwdEmail, that.fwdEmail) &&
+               Objects.equals(date, that.date) &&
+               frequency == that.frequency;
+    }
 
-	public void setDate(Date data) { this.date = data; }
+    @Override
+    public int hashCode() {
+        return Objects.hash(eventDesc, fwdEmail, date, frequency, alarm);
+    }
+    
+    public String getEventDesc() {
+        return eventDesc;
+    }
 
-	public Frequency getFrequency() { return frequency; }
+    public void setEventDesc(String descEvento) {
+        this.eventDesc = descEvento;
+    }
 
-	public void setFrequency(Frequency frequency) { this.frequency = frequency; }
+    public String getFwdEmail() {
+        return fwdEmail;
+    }
 
-	public boolean getAlarm() { return alarm; }
+    public void setFwdEmail(String encEmail) {
+        this.fwdEmail = encEmail;
+    }
 
-	public void setAlarm(boolean alarme) { this.alarm = alarme; }
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date data) {
+        this.date = data;
+    }
+
+    public Frequency getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(Frequency frequency) {
+        this.frequency = frequency;
+    }
+
+    public boolean getAlarm() {
+        return alarm;
+    }
+
+    public void setAlarm(boolean alarme) {
+        this.alarm = alarme;
+    }
 }
