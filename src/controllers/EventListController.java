@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package controllers;
 
 import java.util.Vector;
@@ -12,33 +9,58 @@ import core.Controller;
 import models.SchedulerIO;
 import views.EventListView;
 
-public class EventListController {
-    
-   
+
+/**
+ * Responsible for {@link EventListView} behavior.
+ */
+public class EventListController extends Controller 
+{
+	//-----------------------------------------------------------------------
+	//		Attributes
+	//-----------------------------------------------------------------------
 	private EventListView eventListView;
 	private JTable table;
 	
 	
+	//-----------------------------------------------------------------------
+	//		Methods
+	//-----------------------------------------------------------------------
+	@Override
 	public void run() 
 	{
 		table = new JTable(getDataColumns(), getNameColumns());
 		eventListView = new EventListView(this, table);
 	}
 	
-	
+	/**
+	 * Adds a new row in a {@link JTable} with the values informed.
+	 * 
+	 * @param values Values to be add in {@link JTable}
+	 */
 	public void addNewRow(Object[] values) 
 	{
 		((DefaultTableModel) table.getModel()).addRow(values);
 	}
 	
 	
-
+	//-----------------------------------------------------------------------
+	//		Getters
+	//-----------------------------------------------------------------------
+	/**
+	 * Gets the {@link EventListView view associated with this controller}.
+	 * 
+	 * @return View associated with this controller
+	 */
 	public EventListView getView()
 	{
 		return eventListView;
 	}
 	
-	
+	/**
+	 * Returns the names of the columns of the events list.
+	 * 
+	 * @return Table metadata in a list
+	 */
 	public Vector<String> getNameColumns() 
 	{
 		Vector<String> nameColumns = new Vector<String>();
@@ -52,7 +74,11 @@ public class EventListController {
 		return nameColumns;
 	}
 	
-	
+	/**
+	 * Returns events list data.
+	 * 
+	 * @return Table data in a list of lists (matrix)
+	 */
 	public Vector<Vector<Object>> getDataColumns() 
 	{
 		Vector<Vector<Object>> dataColumns = null;
@@ -65,5 +91,4 @@ public class EventListController {
 
 		return dataColumns;
 	}
-    
 }

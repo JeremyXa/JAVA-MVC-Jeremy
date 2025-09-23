@@ -9,9 +9,7 @@ import java.util.Date;
 
 public class SchedulerEvent 
 {
-	//-----------------------------------------------------------------------
-	//		Attributes
-	//-----------------------------------------------------------------------
+	
 	private String eventDesc;
 	private String fwdEmail;
 	private Date date;
@@ -19,9 +17,7 @@ public class SchedulerEvent
 	private boolean alarm;
 
 	
-	//-----------------------------------------------------------------------
-	//		Methods
-	//-----------------------------------------------------------------------
+	
 	@Override
 	public String toString() 
 	{
@@ -33,9 +29,7 @@ public class SchedulerEvent
 	}
 	
 
-	//-----------------------------------------------------------------------
-	//		Getters & Setters
-	//-----------------------------------------------------------------------
+	
 	public String getEventDesc() { return eventDesc; }
 
 	public void setEventDesc(String descEvento) { this.eventDesc = descEvento; }

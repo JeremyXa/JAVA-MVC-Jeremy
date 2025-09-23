@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package controllers;
 
 import javax.swing.JOptionPane;
@@ -13,8 +10,12 @@ import views.EventListView;
 import views.NewEventView;
 
 
-public class NewEventController {
-    //-----------------------------------------------------------------------
+/**
+ * Responsible for {@link NewEventView} behavior.
+ */
+public class NewEventController extends Controller 
+{
+	//-----------------------------------------------------------------------
 	//		Attributes
 	//-----------------------------------------------------------------------
 	private NewEventView newEventView;
@@ -40,7 +41,7 @@ public class NewEventController {
 	//-----------------------------------------------------------------------
 	//		Methods
 	//-----------------------------------------------------------------------
-	
+	@Override
 	public void run() 
 	{
 		newEventView = new NewEventView(this);

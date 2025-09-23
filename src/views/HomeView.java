@@ -1,9 +1,6 @@
+
 package views;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JFrame;
@@ -16,6 +13,10 @@ import core.Model;
 import core.View;
 
 
+/**
+ * View associated with {@link HomeController}. It will be responsible for program's 
+ * main screen view.
+ */
 @SuppressWarnings("serial")
 public class HomeView extends JPanel implements View
 {

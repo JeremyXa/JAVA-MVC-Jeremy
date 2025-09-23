@@ -8,7 +8,9 @@ package models;
  *
  * @author jerem
  */
-public enum Frequency 
+public enum Frequency  //enum es una forma de crear valores fijos o predefinidos.
+
+//Aquí se define una enumeración llamada Frequency (Frecuencia).
 {
 	DAILY, WEEKLY, MONTHLY;
 }

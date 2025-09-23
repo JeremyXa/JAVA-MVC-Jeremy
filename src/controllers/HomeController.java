@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package controllers;
 
 import core.Controller;
@@ -10,14 +7,23 @@ import views.HomeView;
 import views.NewEventView;
 
 
-public class HomeController extends Controller {
-    private HomeView homeView;
-    private EventListController eventListController = new EventListController();
-    private NewEventController newEventController = new NewEventController(eventListController);
-    
-    
-    
-
+/**
+ * Main controller. It will be responsible for program's main screen behavior.
+ */
+public class HomeController extends Controller 
+{
+	//-----------------------------------------------------------------------
+	//		Attributes
+	//-----------------------------------------------------------------------
+	private HomeView homeView;
+	private EventListController eventListController = new EventListController();
+	private NewEventController newEventController = new NewEventController(eventListController);
+	
+	
+	//-----------------------------------------------------------------------
+	//		Methods
+	//-----------------------------------------------------------------------
+	@Override
 	public void run()
 	{
 		// Initializes others controllers

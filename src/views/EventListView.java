@@ -1,9 +1,5 @@
-package views;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+package views;
 
 import java.awt.BorderLayout;
 
@@ -15,17 +11,30 @@ import controllers.EventListController;
 import core.Model;
 import core.View;
 
+
+/**
+ * View responsible for the list of events.
+ */
 @SuppressWarnings("serial")
 public class EventListView extends JPanel implements View
 {
-	
+	//-----------------------------------------------------------------------
+	//		Attributes
+	//-----------------------------------------------------------------------
 	@SuppressWarnings("unused")
 	private EventListController eventListController;
 	private JTable table;
 	
 	
-	
-	
+	//-----------------------------------------------------------------------
+	//		Constructor
+	//-----------------------------------------------------------------------
+	/**
+	 * It will show the list of saved events.
+	 * 
+	 * @param eventListController Controller responsible for this view
+	 * @param table Table with saved events
+	 */
 	public EventListView(EventListController eventListController, JTable table)
 	{
 		this.eventListController = eventListController;
@@ -35,7 +44,9 @@ public class EventListView extends JPanel implements View
 	}
 	
 	
-	
+	//-----------------------------------------------------------------------
+	//		Methods
+	//-----------------------------------------------------------------------
 	@Override
 	public void update(Model model, Object data) 
 	{
@@ -45,7 +56,9 @@ public class EventListView extends JPanel implements View
 		}
 	}
 	
-
+	/**
+	 * Creates view's frame.
+	 */
 	private void make_frame()
 	{
 		JScrollPane scrollPane = new JScrollPane(table);

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package views;
 
 import java.awt.Font;
@@ -27,10 +24,16 @@ import models.Frequency;
 import models.SchedulerEvent;
 import models.SchedulerUtil;
 
+
+/**
+ * View responsible for a creation of a new event.
+ */
 @SuppressWarnings("serial")
 public class NewEventView extends JPanel implements View
 {
-	
+	//-----------------------------------------------------------------------
+	//		Attributes
+	//-----------------------------------------------------------------------
 	private NewEventController newEventController;	
 	private JTextField tf_eventDesc;
 	private JTextField tf_forwardEmail;
@@ -41,7 +44,12 @@ public class NewEventView extends JPanel implements View
 	private JRadioButton rbtn_daily;
 	
 	
-	
+	//-----------------------------------------------------------------------
+	//		Constructor
+	//-----------------------------------------------------------------------
+	/**
+	 * @param newEventController Controller of this view
+	 */
 	public NewEventView(NewEventController newEventController) 
 	{
 		this.newEventController = newEventController;
@@ -57,7 +65,9 @@ public class NewEventView extends JPanel implements View
 	}
 
 	
-	
+	//-----------------------------------------------------------------------
+	//		Methods
+	//-----------------------------------------------------------------------
 	@Override
 	public void update(Model model, Object data) 
 	{
@@ -67,29 +77,35 @@ public class NewEventView extends JPanel implements View
 		}
 	}
 	
-	
+	/**
+	 * Reset all fields.
+	 */
 	private void cleanFields() 
 	{
-		tf_date.setText("");				
-		tf_eventDesc.setText("");			
-		cbx_alarm.setSelected(false);		
-		tf_forwardEmail.setText("");		
-		rbtn_daily.setSelected(true);		
+		tf_date.setText("");				// Erases date field
+		tf_eventDesc.setText("");			// Erases event description field
+		cbx_alarm.setSelected(false);		// Unchecks check box
+		tf_forwardEmail.setText("");		// Erases forward email field
+		rbtn_daily.setSelected(true);		// Select radio button default
 	}
 	
-	
+	/**
+	 * Creates view's frame.
+	 */
 	private void make_frame() { setLayout(null); }
 	
-	
+	/**
+	 * Creates event description field.
+	 */
 	private void make_field_eventDesc()
 	{
-		
+		// Makes label
 		JLabel lbl_eventDesc = new JLabel("Event description");
 		lbl_eventDesc.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lbl_eventDesc.setBounds(29, 29, 134, 14);
 		add(lbl_eventDesc);
 		
-		
+		// Makes text field
 		tf_eventDesc = new JTextField();
 		tf_eventDesc.setBounds(169, 26, 196, 20);
 		add(tf_eventDesc);
@@ -101,29 +117,31 @@ public class NewEventView extends JPanel implements View
 	 */
 	private void make_field_fwdEmail()
 	{
-		
+		// Makes label
 		JLabel lbl_forwardEmail = new JLabel("Forward e-mail");
 		lbl_forwardEmail.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lbl_forwardEmail.setBounds(29, 71, 104, 14);
 		add(lbl_forwardEmail);
 
-		
+		// Makes text field
 		tf_forwardEmail = new JTextField();
 		tf_forwardEmail.setBounds(169, 68, 196, 20);
 		add(tf_forwardEmail);
 		tf_forwardEmail.setColumns(10);
 	}
 	
-
+	/**
+	 * Creates date field.
+	 */
 	private void make_field_date()
 	{
-		
+		// Makes label
 		JLabel lbl_date = new JLabel("Date");
 		lbl_date.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lbl_date.setBounds(29, 119, 78, 14);
 		add(lbl_date);
 
-		
+		// Makes text field
 		try {
 			tf_date = new JFormattedTextField(new MaskFormatter("##/##/####"));
 			tf_date.setBounds(169, 116, 96, 20);
@@ -134,55 +152,61 @@ public class NewEventView extends JPanel implements View
 		}
 	}
 	
-	
+	/**
+	 * Creates frequency field.
+	 */
 	private void make_field_frequency()
 	{
 		final ButtonGroup btng_periodicity = new ButtonGroup();
 		
-		
+		// Frequency label
 		JLabel lbl_frequency = new JLabel("Frequency");
 		lbl_frequency.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lbl_frequency.setBounds(29, 164, 78, 14);
 		add(lbl_frequency);
 		
-		
+		// Daily option
 		rbtn_daily = new JRadioButton("Daily");
 		btng_periodicity.add(rbtn_daily);
 		rbtn_daily.setSelected(true);
 		rbtn_daily.setBounds(169, 160, 60, 23);
 		add(rbtn_daily);
 
-		
+		// Weekly option
 		rbtn_weekly = new JRadioButton("Weekly");
 		btng_periodicity.add(rbtn_weekly);
 		rbtn_weekly.setBounds(253, 160, 67, 23);
 		add(rbtn_weekly);
 
-		
+		// Monthly option
 		rbtn_monthly = new JRadioButton("Monthly");
 		btng_periodicity.add(rbtn_monthly);
 		rbtn_monthly.setBounds(347, 160, 78, 23);
 		add(rbtn_monthly);
 	}
 	
-	
+	/**
+	 * Creates alarm check box.
+	 */
 	private void make_field_alarm()
 	{
-		
+		// Makes check box
 		cbx_alarm = new JCheckBox("Alarm");
 		cbx_alarm.setBounds(29, 220, 97, 23);
 		add(cbx_alarm);
 	}
 	
-	
+	/**
+	 * Creates save button.
+	 */
 	private void make_btn_save()
 	{
-		
+		// Makes button
 		JButton btn_save = new JButton("Save");
 		btn_save.setBounds(127, 220, 89, 23);
 		add(btn_save);
 
-		
+		// Add action listener
 		btn_save.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -207,15 +231,17 @@ public class NewEventView extends JPanel implements View
 		});
 	}
 	
-	
+	/**
+	 * Creates clear button.
+	 */
 	private void make_btn_clean()
 	{
-		
+		// Makes button
 		JButton btn_clean = new JButton("Clean");
 		btn_clean.setBounds(253, 220, 89, 23);
 		add(btn_clean);
 
-		
+		// Add action listener
 		btn_clean.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

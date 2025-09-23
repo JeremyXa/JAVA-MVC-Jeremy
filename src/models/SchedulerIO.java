@@ -19,18 +19,14 @@ import core.View;
 
 public class SchedulerIO implements Model
 {
-	//-----------------------------------------------------------------------
-	//		Attributes
-	//-----------------------------------------------------------------------
+	
 	private static final String DIRECTORY = ".";
 	private static final String FILE = "events.txt";
 	private List<View> views = new ArrayList<>();
 	private String notice;
 
 	
-	//-----------------------------------------------------------------------
-	//		Methods
-	//-----------------------------------------------------------------------
+	
 	@Override
 	public void attach(View view) 
 	{
@@ -51,12 +47,7 @@ public class SchedulerIO implements Model
 		}
 	}
 	
-	/**
-	 * Saves a {@link SchedulerEvent} in disk in {@link #DIRECTORY}.{@link #FILE}.
-	 * 
-	 * @param event {@link SchedulerEvent Event} to be saved
-	 * @throws Exception If it can't save the event
-	 */
+	
 	public void saveEvent(SchedulerEvent event) throws Exception 
 	{
 		try {
@@ -73,11 +64,7 @@ public class SchedulerIO implements Model
 		}
 	}
 
-	/**
-	 * Reads a {@link SchedulerEvent} saved in disk with name {@link #FILE}.
-	 * @return List of lists (matrix) of the events
-	 * @throws Exception If it can't read event file
-	 */
+	
 	public Vector<Vector<Object>> getEvents() throws Exception 
 	{
 		Vector<Vector<Object>> response = new Vector<Vector<Object>>();
